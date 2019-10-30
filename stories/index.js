@@ -17,6 +17,7 @@ import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
+import Error from "components/Appointment/Error";
 
 
 storiesOf("Button", module)
@@ -105,7 +106,7 @@ storiesOf("InterviewerListItem", module)
       id={interviewer.id}
       name={interviewer.name}
       avatar={interviewer.avatar}
-      setInterviewer={event => action("setInterviewer")(interviewer.id)}
+      setInterviewer={() => action("setInterviewer")(interviewer.id)}
     />
   ));
 
@@ -124,16 +125,14 @@ storiesOf("InterviewerList", module)
   .add("Initial", () => (
     <InterviewerList
       interviewers={interviewers}
-      setInterviewer={action("onChange")(interviewer.id)}
+      setInterviewer={(id) => action("setInterviewer")(id)}
     />
   ))
   .add("Preselected", () => (
     <InterviewerList
       interviewers={interviewers}
       interviewer={3}
-      setInterviewer={action("onChange")(interviewer.id)}
-    // selected={props.value === interviewer.id}
-    // add selected changes with props.value and interviewer.id
+      setInterviewer={(id) => action("setInterviewer")(id)}
     />
   ));
 
@@ -165,4 +164,10 @@ storiesOf("Appointment", module)
       message="Deleting"
     />
   ))
+  .add("Error", () => (
+    <Error
+      message="Could not delete appointment"
+      onClose={action("onClose")}
+    />
+  ));
 
