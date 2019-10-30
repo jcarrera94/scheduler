@@ -3,12 +3,12 @@ import InterviewerListItem from "components/InterviewerListItem";
 import "components/InterviewerList.scss";
 
 export default function InterviewerList(props) {
-  let [state, setState] = useState(props.interviewer);
+  // let [state, setState] = useState(props.value);
 
-  let update = (id) => {
-    setState(id);
-    props.setInterviewer(id);
-  }
+  // let update = (id) => {
+  //   setState(id);
+  //   props.onChange(id);
+  // }
 
   return (
     <section className="interviewers">
@@ -20,10 +20,10 @@ export default function InterviewerList(props) {
               key={interviewer.id}
               name={interviewer.name}
               avatar={interviewer.avatar}
-              selected={interviewer.id === state}
-              // setInterviewer={() => setState(interviewer.id)}
+              selected={interviewer.id === props.value}
+              onClick={() => props.onChange(interviewer.id)}
               // onClick={() => setState(interviewer.id)}
-              onClick={() => update(interviewer.id)}
+              // onClick={() => update(interviewer.id)}
             />
           );
         })}
