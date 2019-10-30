@@ -60,6 +60,18 @@ const appointments = [
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
   const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    axios.get('api/days')
+    .then(res => setDays(res.data))
+    .catch((error) => {
+      console.log(error.response.status);
+      console.log(error.response.headers);
+      console.log(error.response.data);
+    });
+  }, []);
+
+
   return (
     <main className="layout">
       <section className="sidebar">
