@@ -21,6 +21,6 @@ export function getInterview(state, interview) {
     return result;
   }
   result = interview;
-  result.interviewer = state.interviewers[interview.interviewer];
+  result.interviewer = state.interviewers[typeof interview.interviewer === 'number' ? interview.interviewer : interview.interviewer.id];
   return result;
 }

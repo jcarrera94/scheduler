@@ -21,7 +21,6 @@ export function useVisualMode(initial) {
         let copyHistory = [...history]
         copyHistory.pop();
         let variable = copyHistory.slice(-1)[0];
-        console.log("variableee:", variable)
         setMode(variable);
         setHistory(copyHistory);
       }
