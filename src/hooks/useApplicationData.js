@@ -12,7 +12,7 @@ function reducer(state, action) {
     case SET_APPLICATION_DATA:
       return { ...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
     case SET_INTERVIEW:
-      return {...state, appointments: action.appointments}
+      return { ...state, appointments: action.appointments, days: action.days }
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -42,9 +42,19 @@ export function useApplicationData() {
       });
   }, []);
 
-  const setDay = (day) => dispatch({ type: SET_DAY,  day });
+  const setDay = (day) => dispatch({ type: SET_DAY, day });
 
-  const bookInterview = (id, interview) => {
+  const checkDay = (id) => {
+    let dayID = null;
+    for (const obj of state.days) {
+      if (obj.appointments.includes(id)) {
+        dayID = obj.id;
+      }
+    }
+    return dayID;
+  }
+
+  const bookInterview = (id, interview, create = false) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -53,8 +63,17 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
+    const days = [...state.days];
+    if (create) {
+      console.log("this happens")
+      for (const obj of days) {
+        if (obj.id === checkDay(id)) {
+          obj.spots -= 1;
+        }
+      }
+    }
     return axios.put(`/api/appointments/${id}`, { interview })
-      .then(() => dispatch({ type: SET_INTERVIEW, appointments }))
+      .then(() => dispatch({ type: SET_INTERVIEW, appointments, days }))
   }
 
   const cancelInterview = (id) => {
@@ -66,8 +85,14 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
+    const days = [...state.days];
+    for (const obj of days) {
+      if (obj.id === checkDay(id)) {
+        obj.spots += 1;
+      }
+    }
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => dispatch({ type: SET_INTERVIEW, appointments }))
+      .then(() => dispatch({ type: SET_INTERVIEW, appointments, days }))
   }
 
   return {

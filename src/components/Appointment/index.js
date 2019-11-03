@@ -28,13 +28,14 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  const save = (name, interviewer) => {
+  const save = (name, interviewer, create) => {
     const interview = {
       student: name,
       interviewer
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview)
+    console.log("this is create:", create)
+    props.bookInterview(props.id, interview, create)
       .then(() => transition(SHOW))
       .catch(err => {
         transition(ERROR_S, true);
@@ -68,7 +69,8 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={(name, interviewer) => save(name, interviewer)}
+          onSave={(name, interviewer, create) => save(name, interviewer, create)}
+          isSave={true}
         />
       )}
       {mode === SAVING && <Status message="Saving booked interview!" />}

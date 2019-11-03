@@ -24,7 +24,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={getInterview(state, appointment.interview)}
         interviewers={getInterviewersForDay(state, state.day)}
-        bookInterview={(id, interview) => bookInterview(id, interview)}
+        bookInterview={(id, interview, create) => bookInterview(id, interview, create)}
         cancelInterview={id => cancelInterview(id)}
       />
     )
