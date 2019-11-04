@@ -24,17 +24,21 @@ const ERROR_S = "ERROR_S";
 
 
 export default function Appointment(props) {
-  const { mode, transition, back } = useVisualMode(
+  const { mode, error, clearError, logError, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
   const save = (name, interviewer, create) => {
+    // clearError();
+    // if (!name.length || !interviewer) {
+    //   logError('Name and interviewer cannot be empty');
+    //   return;
+    // }
     const interview = {
       student: name,
       interviewer
     };
     transition(SAVING);
-    console.log("this is create:", create)
     props.bookInterview(props.id, interview, create)
       .then(() => transition(SHOW))
       .catch(err => {
@@ -68,7 +72,10 @@ export default function Appointment(props) {
       {mode === CREATE && (
         <Form
           interviewers={props.interviewers}
-          onCancel={() => back()}
+          // error={error}
+          onCancel={() => { back(); 
+            // clearError()
+          }}
           onSave={(name, interviewer, create) => save(name, interviewer, create)}
           isSave={true}
         />
@@ -87,7 +94,10 @@ export default function Appointment(props) {
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
-          onCancel={() => back()}
+          // error={error}
+          onCancel={() => { back(); 
+            // clearError()
+          }}
           onSave={(name, interviewer) => save(name, interviewer)}
         />
       )}

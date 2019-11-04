@@ -65,7 +65,6 @@ export function useApplicationData() {
     }
     const days = [...state.days];
     if (create) {
-      console.log("this happens")
       for (const obj of days) {
         if (obj.id === checkDay(id)) {
           obj.spots -= 1;

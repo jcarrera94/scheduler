@@ -3,9 +3,17 @@ import { useState } from 'react';
 export function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
+  const [error, setError] = useState('');
 
   return { 
     mode, 
+    error,
+    clearError: () => {
+      setError('');
+    },
+    logError: (msg) => {
+      setError(msg);
+    },
     transition: (newMode, replace = false) => {
       setMode(newMode); 
       if (replace) {
