@@ -63,14 +63,9 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
-    const days = [...state.days];
-    if (create) {
-      for (const obj of days) {
-        if (obj.id === checkDay(id)) {
-          obj.spots -= 1;
-        }
-      }
-    }
+    const days = state.days.map( day => {
+      return (create ? day.id === checkDay(id) ? { ...day, spots: day.spots - 1 } : { ...day } : { ...day })
+    });
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => dispatch({ type: SET_INTERVIEW, appointments, days }))
   }
@@ -84,12 +79,9 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
-    const days = [...state.days];
-    for (const obj of days) {
-      if (obj.id === checkDay(id)) {
-        obj.spots += 1;
-      }
-    }
+    const days = state.days.map( day => {
+      return (day.id === checkDay(id) ? { ...day, spots: day.spots + 1 } : { ...day })
+    });
     return axios.delete(`/api/appointments/${id}`)
       .then(() => dispatch({ type: SET_INTERVIEW, appointments, days }))
   }
