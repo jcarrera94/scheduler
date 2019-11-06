@@ -24,16 +24,11 @@ const ERROR_S = "ERROR_S";
 
 
 export default function Appointment(props) {
-  const { mode, error, clearError, logError, transition, back } = useVisualMode(
+  const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
   const save = (name, interviewer, create) => {
-    // clearError();
-    // if (!name.length || !interviewer) {
-    //   logError('Name and interviewer cannot be empty');
-    //   return;
-    // }
     const interview = {
       student: name,
       interviewer

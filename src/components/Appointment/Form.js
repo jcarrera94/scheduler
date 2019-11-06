@@ -9,7 +9,7 @@ export default function Form(props) {
   const reset = () => {
     setName("");
     setInterviewerId(null);
-    // setError('');
+    setError('');
   }
   const cancel = () => {
     reset();
@@ -17,11 +17,12 @@ export default function Form(props) {
   }
 
   const validate = () => {
-    if (name === "") {
-      setError("Student name cannot be blank");
+    console.log("intId", interviewerId);
+    if (!name || !interviewerId) {
+      setError("Student name or interviewer cannot be blank");
       return;
     }
-    setError('');
+    reset();
     props.onSave(name, interviewerId, props.isSave)
   }
   return (
