@@ -12,7 +12,7 @@ describe("Application", () => {
     render(<Application />);
   });
 
-  xit("defaults to Monday and changes the schedule when a new day is selected", () => {
+  it("defaults to Monday and changes the schedule when a new day is selected", () => {
     const { getByText } = render(<Application />);
 
     return waitForElement(() => getByText("Monday")).then(() => {

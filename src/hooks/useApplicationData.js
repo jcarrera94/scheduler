@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import axios from "axios";
 import { reducer, SET_DAY, SET_APPLICATION_DATA, SET_INTERVIEW } from "reducers/application"
 
@@ -21,7 +21,7 @@ export function useApplicationData() {
         dispatch({ type: SET_APPLICATION_DATA, days: all[0].data, appointments: all[1].data, interviewers: all[2].data })
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 
