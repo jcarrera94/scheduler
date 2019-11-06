@@ -4,6 +4,18 @@ Interview scheduler is an application used to book interviews with available men
 
 This project was developed as a learning tool from Lighthouse Labs Web Development Bootcamp to encompass building react componenets and perform extensive testing (Static, Unit, Integration, End-to-end)
 
+## Application screens
+
+#### Welcome to Scheduler!
+![Welcome](/docs/scheduler.png)
+
+#### You can book an appointment!
+![Appointment](/docs/appointment-form.png)
+
+#### You can delete an appointment!
+![Appointment - delete](/docs/appointment-delete.png)
+
+
 ## Setup
 
 1. Fork/Clone this repository into your own local machine.
