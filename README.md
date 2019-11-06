@@ -6,13 +6,11 @@ This project was developed as a learning tool from Lighthouse Labs Web Developme
 
 ## Setup
 
-Install dependencies with `npm install`.
-
-## Running Webpack Development Server
-
-```sh
-npm start
-```
+1. Fork/Clone this repository into your own local machine.
+2. Install dependencies with `npm install`.
+3. Start the Webpack Development Server (client) using the `npm start` command. The app should open at <http://localhost:8000/>.
+4. Be sure to be running the `scheduler-api` server at <http://localhost:8001/>. You can clone the repo from the [scheduler-api](https://github.com/lighthouse-labs/scheduler-api) repository.
+5. Make sure your local Postgres database name is scheduler_development.
 
 ## Running Jest Test Framework
 
